@@ -1,0 +1,10 @@
+<%if @error.present? %>
+$('#status-error').html("<%=@error %>").show()
+<% else %>
+  $('#status-error').html(" ").hide()
+  <% if @order.shipments.size>0 %>
+    $('#status-text').html("Your order has been shipped, tracking # <%=@order.shipments.first.tracking %>").show()
+  <% else %>
+    $('#status-text').html("Your order has been shipped, tracking # still not available yet.").show()
+  <%end %>
+<%end %>
