@@ -12,8 +12,8 @@
           We will fetch and display your order and status along
           with any special notes that may have been added.
         </p>
-        <p>If you have any questions, please <a href="/pages/contact-us"> contact us</a> or email us at
-          <%= current_store.contact_email %></p>
+        <p>If you have any questions, please <a href="<%= @contact_link.present? ? @contact_link : '/pages/contact-us' %>" class="text-danger"> contact us</a> or email us at
+          <a href="mailto: <%= current_store.contact_email %>" class="text-danger"><%= current_store.contact_email %></a></p>
       </div>
       <div class="col-12 col-lg-6 mt-5 mt-lg-0">
         <div class="jumbotron">

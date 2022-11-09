@@ -3,7 +3,12 @@ $('#status-error').html("<%=@error %>").show()
 <% else %>
   $('#status-error').html(" ").hide()
   <% if @order.shipments.size>0 %>
-    $('#status-text').html("Your order has been shipped, tracking # <%=@order.shipments.first.tracking %>").show()
+  <% tracking_url = @order.shipments.first.tracking_url %>
+  <% if tracking_url.present? %>
+    $('#status-text').html('Your order has been shipped, tracking <a href="<%= tracking_url %>" class="text-success" target="_blank"><%= @order.shipments.first.tracking %></a>').show()
+  <% else %>
+    $('#status-text').html('Your order has been shipped, tracking # <%= @order.shipments.first.tracking %>').show()
+  <% end %>
   <% else %>
     $('#status-text').html("Your order has been shipped, tracking # still not available yet.").show()
   <%end %>
