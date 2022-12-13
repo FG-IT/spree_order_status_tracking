@@ -19,7 +19,7 @@
         <div class="jumbotron">
           <p id="status-error" class="text-danger"></p>
           <p id="status-text" class="text-info"></p>
-          <%= form_with url: order_status_path, html: {novalidate: ''} do |f| %>
+          <%= form_with url: order_status_path, local: false, html: {:id=>'order-status'} do |f| %>
             <div class="form-group">
               <label>Order #</label>
               <%= f.text_field :order_id, class: 'required col-12 mb-1 mb-lg-2', placeholder: true, required: true %>
