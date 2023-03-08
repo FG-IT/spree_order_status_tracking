@@ -9,7 +9,7 @@ module SpreeOrderStatusTracking::Spree::OrdersControllerDecorator
       @orders = nil
     else
       @orders = ::Spree::Order.includes(:shipments)
-                   .where(email: params[:email]).order(id: :desc).limit(3)
+                   .where(email: params[:email], state: :complete).order(id: :desc).limit(3)
     end
 
     respond_to do |format|
