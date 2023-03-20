@@ -13,10 +13,10 @@ $('#status-error').html("<%=@error %>").show()
       elsif tracking_number.present?
         status += "<p>Your order #{order.number} has been shipped, tracking # #{tracking_number}</p>"
       else
-        status += "<p>Your order #{order.number} has been shipped, tracking still not available yet.</p>"
+        status += "<p>Your order #{order.number} is processing. As soon as your product(s) ship from our warehouse, you will be sent an email with your tracking number.</p>"
       end
     else
-      status += "<p>Your order #{order.number} has been shipped, tracking still not available yet.</p>"
+      status += "<p>Your order #{order.number} is being processing, tracking still not available yet.</p>"
     end
   end
   %>
