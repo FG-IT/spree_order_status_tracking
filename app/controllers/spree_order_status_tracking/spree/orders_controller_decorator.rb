@@ -28,18 +28,18 @@ module SpreeOrderStatusTracking::Spree::OrdersControllerDecorator
         end
 
         if @order.shipped?
-          shipment_items = []
+          shipments = []
           shipped_times = []
           @order.shipments.each do |shipment|
-            shipment_items << {tracking: shipment.tracking, shipped_at: shipment.shipped_at, carrier: shipment.carrier, state: shipment.state}
+            shipments << {tracking: shipment.tracking, shipped_at: shipment.shipped_at, carrier: shipment.carrier, state: shipment.state, manifest: shipment.manifest}
             shipped_times << shipment.shipped_at if shipment.shipped_at.present?
           end
 
           if @order.shipment_state == "partial"
-            @events[:partial_shipped][:items] = shipment_items
+            @events[:partial_shipped][:shipments] = shipments
             @events[:partial_shipped][:record_time] = shipped_times.sort.first
           elsif @order.shipment_state == "shipped"
-            @events[:shipped][:items] = shipment_items
+            @events[:shipped][:shipments] = shipments
             @events[:shipped][:record_time] = shipped_times.sort.last
           end
         end

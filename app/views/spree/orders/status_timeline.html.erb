@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-12 pt-lg-2 text-center text-lg-left">
-        <div class="px-3 px-lg-0 pt-lg-1 my-5 contact-us-header"><h2>Order Status</h2></div>
+        <div class="px-3 px-lg-0 pt-lg-1 my-3 contact-us-header"><h2>Delivery Status for #<%= @order.number %></h2></div>
       </div>
-      <div class="col-12 text-lg-left text-center pb-5">
+      <div class="col-12 text-lg-left text-center pb-2">
         <p>If you have any questions, please <a href="<%= @contact_link.present? ? @contact_link : '/pages/contact-us' %>" class="text-danger"> contact us</a> or email us at
           <a href="mailto: <%= current_store.contact_email %>" class="text-danger"><%= current_store.contact_email %></a></p>
       </div>
@@ -30,12 +30,15 @@
               <li class="event" data-date="<%= @order.shipped? && @order.shipment_state == "shipped" ? @events[:shipped][:record_time].strftime('%Y-%m-%d %T') : "" %>">
                 <h3><%= @events[:shipped][:description] %></h3>
                 <% if @order.shipped? && @order.shipment_state == "shipped" %>
-                <p>
-                  <% @events[:shipped][:items].each do |item| %>
-                    <p><%= item[:carrier] ? "Carrier: " + item[:carrier] : "" %></p>
-                    <p><%= item[:tracking] ? " Tracking: " + item[:tracking] : "" %></p>
+                <ul>
+                  <% @events[:shipped][:shipments].each do |shipment| %>
+                    <li><% shipment[:manifest].each do |item| %>
+                        <%= mini_image(item.variant) unless item.variant.nil? %>
+                        <% end %>
+                        <p><%= shipment[:carrier] + " Tracking: " + shipment[:tracking] %></p>
+                    </li>
                   <% end %>
-                </p>
+                </ul>
                 <% end %>
               </li>
               
@@ -43,11 +46,16 @@
               <% if @order.shipped? && @order.shipment_state == "partial" %>
               <li class="event" data-date="<%= @order.shipped? && @order.shipment_state == "partial" ? @events[:partial_shipped][:record_time].strftime('%Y-%m-%d %T') : "" %>">
                 <h3><%= @events[:partial_shipped][:description] %></h3>
-                <p>
-                  <% @events[:partial_shipped][:items].each do |item| %>
-                    <%= item[:carrier] + " Tracking: " + item[:tracking] %>
+                <ul>
+                  <% @events[:partial_shipped][:shipments].each do |shipment| %>
+                    <li><% shipment[:manifest].each do |item| %>
+                        <%= mini_image(item.variant) unless item.variant.nil? %>
+                        <% end %>
+
+                        <p><%= shipment[:carrier] + " Tracking: " + shipment[:tracking] %></p>
+                    </li>
                   <% end %>
-                </p>
+                </ul>
               </li>
               <% end %>
 
@@ -74,8 +82,7 @@
     border-left: 3px solid #727cf5;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
-    background: rgba(114, 124, 245, 0.09);
-    margin: 0 auto;
+    margin: 0 0 0 auto;
     letter-spacing: 0.2px;
     position: relative;
     line-height: 1.4em;
@@ -116,6 +123,10 @@
     .timeline .event {
         padding-top: 30px;
     }
+}
+
+.timeline .event p {
+    margin: 5px 0;
 }
 
 .timeline .event:last-of-type {
