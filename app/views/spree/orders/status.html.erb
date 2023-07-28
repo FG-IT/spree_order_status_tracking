@@ -21,7 +21,7 @@
           <%= form_with url: order_status_path, html: {novalidate: ''} do |f| %>
             <div class="form-group">
               <label>E-mail address or Order #</label>
-              <%= f.text_field :email, class: 'required col-12 mb-1 mb-lg-2', placeholder: false, required: true %>
+              <%= f.text_field :email, class: 'required col-12 mb-1 mb-lg-2', required: true %>
             </div>
             <div class="form-group">
               <%= f.submit Spree.t(:send), alt: Spree.t(:send), id: 'contact_us_contact_submit', title: Spree.t(:send),

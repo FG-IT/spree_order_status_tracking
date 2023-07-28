@@ -7,7 +7,7 @@ module SpreeOrderStatusTracking::Spree::OrdersControllerDecorator
   def status_check
     if params[:email].blank?
       @orders = nil
-    elsif params[:email].include("@")
+    elsif params[:email].include? "@"
       @orders = ::Spree::Order.includes(:shipments)
                    .where(email: params[:email], state: :complete).order(id: :desc).limit(3)
     else
