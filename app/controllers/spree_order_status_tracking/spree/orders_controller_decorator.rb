@@ -34,6 +34,11 @@ module SpreeOrderStatusTracking::Spree::OrdersControllerDecorator
       @order = ::Spree::Order.includes(:shipments)
                 .where(token: params[:token]).first
 
+      if @order.blank?
+        redirect_to order_status_page_url
+      end
+
+
       if @order.completed?
         @events = {
           submitted: { description: "Order Submitted" }, 
@@ -58,7 +63,7 @@ module SpreeOrderStatusTracking::Spree::OrdersControllerDecorator
           shipments = []
           shipped_times = []
           @order.shipments.each do |shipment|
-            shipments << {tracking: shipment.tracking, shipped_at: shipment.shipped_at, carrier: shipment.carrier, state: shipment.state, manifest: shipment.manifest}
+            shipments << {tracking: shipment.tracking, tracking_url: shipment.tracking_url, shipped_at: shipment.shipped_at, carrier: shipment.carrier, state: shipment.state, manifest: shipment.manifest}
             shipped_times << shipment.shipped_at if shipment.shipped_at.present?
           end
 

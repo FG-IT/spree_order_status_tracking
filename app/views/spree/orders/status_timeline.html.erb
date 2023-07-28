@@ -16,60 +16,159 @@
           <p><%= render 'spree/shared/address_line', address: @order.shipping_address %></p>
 
           <div class="order-timeline">
-            <ul class="timeline">
-
-              <li class="event" data-date="">
-                <h3><%= @events[:delivered][:description] %></h3>
-              </li>
-
-              <li class="event" data-date="">
-                <h3><%= @events[:in_transit][:description] %></h3>
-              </li>
 
               
-              <li class="event" data-date="<%= @order.shipped? && @order.shipment_state == "shipped" ? @events[:shipped][:record_time].strftime('%Y-%m-%d %T') : "" %>">
-                <h3><%= @events[:shipped][:description] %></h3>
-                <% if @order.shipped? && @order.shipment_state == "shipped" %>
-                <ul>
-                  <% @events[:shipped][:shipments].each do |shipment| %>
-                    <li><% shipment[:manifest].each do |item| %>
-                        <%= mini_image(item.variant) unless item.variant.nil? %>
-                        <% end %>
-                        <p><%= shipment[:carrier] + " Tracking: " + shipment[:tracking] %></p>
-                    </li>
-                  <% end %>
-                </ul>
-                <% end %>
-              </li>
-              
+            <div class="TrackingDetail--wrapper--dYB8BZz">
+                <div class="TrackingDetail--content--1z77zJa">
+                    <div class="TrackingDetail--trackList--3VTKVZH">
+                        <div class="TrackingDetail--shipSteps--kvxVRO1">
 
-              <% if @order.shipped? && @order.shipment_state == "partial" %>
-              <li class="event" data-date="<%= @order.shipped? && @order.shipment_state == "partial" ? @events[:partial_shipped][:record_time].strftime('%Y-%m-%d %T') : "" %>">
-                <h3><%= @events[:partial_shipped][:description] %></h3>
-                <ul>
-                  <% @events[:partial_shipped][:shipments].each do |shipment| %>
-                    <li><% shipment[:manifest].each do |item| %>
-                        <%= mini_image(item.variant) unless item.variant.nil? %>
-                        <% end %>
-
-                        <p><%= shipment[:carrier] + " Tracking: " + shipment[:tracking] %></p>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-              <% end %>
-
-              <li class="event" data-date="<%= @order.approved? ? @events[:packing][:record_time].strftime('%Y-%m-%d %T') : "" %>">
-                <h3><%= @events[:packing][:description] %></h3>
-              </li>
+                          <div class="TrackingDetail--step--2sEzXUy TrackingDetail--firstStep--dSIAnAW">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa TrackingDetail--firstVerticalLine--1y0QYTf"></div>
+                            <div class="TrackingDetail--iconNode--37DhYe-"><span class="TrackingDetail--iconNodeCircle--1l6Ys4-" data-spm-anchor-id="0.0.0.i0.43927e30fkEkoI"></span></div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined TrackingDetail--stepContentHeadGrey--13kDuUL">
+                                <span class="TrackingDetail--head--20GpNSP"><%= @events[:delivered][:description] %></span>
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H"><span class="TrackingDetail--timeText--3x08R3x"></span></div>
+                                </div>
+                            </div>
+                          </div>
 
 
-              <li class="event" data-date="<%= @events[:submitted][:record_time].strftime('%Y-%m-%d %T') %>">
-                <h3><%= @events[:submitted][:description] %></h3>
-              </li>
-              
-              
-            </ul>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconCurrent--m_lTx8F TrackingDetail--iconCurrentCenter--2s1WA_v">
+                                <img class="TrackingDetail--stepIconImg--1B1gnKp" src="https://img.alicdn.com/imgextra/i1/O1CN01fPAIee1a5pTIgKnuB_!!6000000003279-2-tps-48-48.png">
+                            </div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined TrackingDetail--stepContentHeadGrey--13kDuUL">
+                                <span class="TrackingDetail--head--20GpNSP"><%= @events[:in_transit][:description] %></span>
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H"><span class="TrackingDetail--timeText--3x08R3x"></span></div>
+                                </div>
+                            </div>
+                          </div>
+
+
+
+                          <% if @order.shipped? && @order.shipment_state == "shipped" %>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconCurrent--m_lTx8F">
+                                <img class="TrackingDetail--stepIconImg--1B1gnKp" src="https://img.alicdn.com/imgextra/i4/O1CN01MZ8JBd1yVWTLbfuHQ_!!6000000006584-2-tps-48-48.png">
+                            </div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP TrackingDetail--headFirst--1mBxADn"><%= @events[:shipped][:description] %></span>
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x TrackingDetail--headFirst--1mBxADn"><%= @events[:shipped][:record_time].strftime('%Y-%m-%d %T') %></span>
+                                    </div>
+                                </div>
+                                <% @events[:shipped][:shipments].each do |shipment| %>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn">
+                                    <% shipment[:manifest].each do |item| %>
+                                        <%= mini_image(item.variant) unless item.variant.nil? %>
+                                    <% end %>
+                                </span>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn"><%= "#{shipment[:carrier]} tracking number:" %></span>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn"><%== shipment[:tracking_url].present? ? "<a href=\"#{shipment[:tracking_url]}\" class=\"text-success\" target=\"_blank\">#{shipment[:tracking]}</a>" : shipment[:tracking] %></span>
+                                <% end %>
+                            </div>
+                          </div>
+                          <% else %>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconCurrent--m_lTx8F">
+                                <img class="TrackingDetail--stepIconImg--1B1gnKp" src="https://img.alicdn.com/imgextra/i1/O1CN01fPAIee1a5pTIgKnuB_!!6000000003279-2-tps-48-48.png">
+                            </div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP"><%= @events[:shipped][:description] %></span>
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x"></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <% end %>
+
+
+
+                          <% if @order.shipped? && @order.shipment_state == "partial" %>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconCurrent--m_lTx8F">
+                                <img class="TrackingDetail--stepIconImg--1B1gnKp" src="https://img.alicdn.com/imgextra/i4/O1CN01MZ8JBd1yVWTLbfuHQ_!!6000000006584-2-tps-48-48.png">
+                            </div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP TrackingDetail--headFirst--1mBxADn"><%= @events[:partial_shipped][:description] %></span>
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x TrackingDetail--headFirst--1mBxADn"><%= @events[:partial_shipped][:record_time].strftime('%Y-%m-%d %T') %></span>
+                                    </div>
+                                </div>
+                                <% @events[:partial_shipped][:shipments].each do |shipment| %>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn">
+                                    <% shipment[:manifest].each do |item| %>
+                                        <%= mini_image(item.variant) unless item.variant.nil? %>
+                                    <% end %>
+                                </span>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn"><%= "#{shipment[:carrier]} tracking number:" %></span>
+                                <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn"><%== shipment[:tracking_url].present? ? "<a href=\"#{shipment[:tracking_url]}\" class=\"text-success\" target=\"_blank\">#{shipment[:tracking]}</a>" : shipment[:tracking] %></span>
+                                <% end %>
+                            </div>
+                          </div>
+                          <% end %>
+
+
+
+                          <% if @order.approved? %>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconNode--37DhYe-"><span class="TrackingDetail--iconNodeCircle--1l6Ys4-" data-spm-anchor-id="0.0.0.i0.43927e30fkEkoI"></span></div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP TrackingDetail--headFirst--1mBxADn"><%= @events[:packing][:description] %></span>
+                                <!-- <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn">Carrier note: Export clearance success</span> -->
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x TrackingDetail--headFirst--1mBxADn"><%= @events[:packing][:record_time].strftime('%Y-%m-%d %T') %></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <% else %>
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--verticalLine--3mb4BXa"></div>
+                            <div class="TrackingDetail--iconNode--37DhYe-"><span class="TrackingDetail--iconNodeCircle--1l6Ys4-" data-spm-anchor-id="0.0.0.i0.43927e30fkEkoI"></span></div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP"><%= @events[:packing][:description] %></span>
+                                <!-- <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn">Carrier note: Export clearance success</span> -->
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x"></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <% end %>
+
+
+
+                          <div class="TrackingDetail--step--2sEzXUy">
+                            <div class="TrackingDetail--iconNode--37DhYe-"><div class="TrackingDetail--verticalLine--3mb4BXa"></div><span class="TrackingDetail--iconNodeCircle--1l6Ys4-"></span></div>
+                            <div class="TrackingDetail--stepContent--2n0dtpG undefined">
+                                <span class="TrackingDetail--head--20GpNSP TrackingDetail--headFirst--1mBxADn"><%= @events[:submitted][:description] %></span>
+                                <!-- <span class="TrackingDetail--text--3Odqdxz TrackingDetail--headFirst--1mBxADn">Carrier note: Export clearance success</span> -->
+                                <div class="TrackingDetail--timeInfoWrap--Ad4suAI">
+                                    <div class="TrackingDetail--time--3ZQQn_H">
+                                        <span class="TrackingDetail--timeText--3x08R3x TrackingDetail--headFirst--1mBxADn"><%= @events[:submitted][:record_time].strftime('%Y-%m-%d %T') %></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
         </div>
       </div>
@@ -78,121 +177,110 @@
 </div>
 
 <style type="text/css">
-.timeline {
-    border-left: 3px solid #727cf5;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    margin: 0 0 0 auto;
-    letter-spacing: 0.2px;
-    position: relative;
-    line-height: 1.4em;
-    font-size: 1.03em;
-    padding: 50px;
-    list-style: none;
-    text-align: left;
-    max-width: 60%;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--firstStep--dSIAnAW {
+    color: #000;
 }
 
-@media (max-width: 767px) {
-    .timeline {
-        max-width: 98%;
-        padding: 25px;
-    }
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--headFirst--1mBxADn, .TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--text--3Odqdxz.TrackingDetail--headFirst--1mBxADn, .TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--timeInfoWrap--Ad4suAI .TrackingDetail--time--3ZQQn_H .TrackingDetail--timeText--3x08R3x.TrackingDetail--headFirst--1mBxADn, .TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--timeText--3x08R3x.TrackingDetail--headFirst--1mBxADn {
+    color: #000!important;
 }
 
-.timeline h1 {
-    font-weight: 300;
-    font-size: 1.4em;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--firstStep--dSIAnAW .TrackingDetail--verticalLine--3mb4BXa {
+    top: 7px;
 }
 
-.timeline h2,
-.timeline h3 {
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-.timeline .event {
-    border-bottom: 1px dashed #e8ebf1;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
-    position: relative;
-}
-
-@media (max-width: 767px) {
-    .timeline .event {
-        padding-top: 30px;
-    }
-}
-
-.timeline .event p {
-    margin: 5px 0;
-}
-
-.timeline .event:last-of-type {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border: none;
-}
-
-.timeline .event:before,
-.timeline .event:after {
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--verticalLine--3mb4BXa {
     position: absolute;
-    display: block;
+    left: 15px;
     top: 0;
+    bottom: 0;
+    z-index: 0;
+    border-left: 1px solid #ccc;
 }
 
-.timeline .event:before {
-    left: -207px;
-    content: attr(data-date);
-    text-align: right;
-    font-weight: 100;
-    font-size: 0.9em;
-    min-width: 120px;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--iconNode--37DhYe- {
+    width: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    align-self: flex-start;
+    padding-top: 7px;
 }
 
-@media (max-width: 767px) {
-    .timeline .event:before {
-        left: 0px;
-        text-align: left;
-    }
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--iconNode--37DhYe- .TrackingDetail--iconNodeCircle--1l6Ys4- {
+    width: 5px;
+    height: 5px;
+    border-radius: 2.5px;
+    background-color: #ccc;
+    position: relative;
+    z-index: 1;
+    margin-left: 1px;
 }
 
-.timeline .event:after {
-    -webkit-box-shadow: 0 0 0 3px #727cf5;
-    box-shadow: 0 0 0 3px #727cf5;
-    left: -55.8px;
-    background: #fff;
-    border-radius: 50%;
-    height: 9px;
-    width: 9px;
-    content: "";
-    top: 5px;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    padding-bottom: 40px;
 }
 
-@media (max-width: 767px) {
-    .timeline .event:after {
-        left: -31.8px;
-    }
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--iconCurrentCenter--2s1WA_v {
+    justify-content: center;
 }
 
-.rtl .timeline {
-    border-left: 0;
-    text-align: right;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-    border-right: 3px solid #727cf5;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--iconCurrent--m_lTx8F .TrackingDetail--verticalLine--3mb4BXa {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 3px;
+    z-index: 0;
+    border-left: 1px solid #ccc;
 }
 
-.rtl .timeline .event::before {
-    left: 0;
-    right: -170px;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--iconCurrent--m_lTx8F .TrackingDetail--stepIconImg--1B1gnKp {
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+    position: relative;
 }
 
-.rtl .timeline .event::after {
-    left: 0;
-    right: -55.8px;
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    flex: 1;
 }
+
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--head--20GpNSP {
+    font-weight: 500;
+    color: #999;
+    line-height: 21px;
+}
+
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--text--3Odqdxz {
+    font-size: 14px;
+    color: #999;
+    white-space: pre-line;
+    word-break: break-word;
+    line-height: 18px;
+}
+
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--timeInfoWrap--Ad4suAI {
+    display: flex;
+    flex-direction: row;
+}
+
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--timeInfoWrap--Ad4suAI .TrackingDetail--time--3ZQQn_H {
+    color: #999;
+}
+
+.TrackingDetail--wrapper--dYB8BZz .TrackingDetail--content--1z77zJa .TrackingDetail--trackList--3VTKVZH .TrackingDetail--shipSteps--kvxVRO1 .TrackingDetail--step--2sEzXUy .TrackingDetail--stepContent--2n0dtpG .TrackingDetail--timeInfoWrap--Ad4suAI .TrackingDetail--time--3ZQQn_H .TrackingDetail--timeText--3x08R3x {
+    font-size: 14px;
+    line-height: 18px;
+    color: #999;
+}
+
 </style>
